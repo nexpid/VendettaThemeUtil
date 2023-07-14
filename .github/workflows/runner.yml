@@ -39,6 +39,7 @@ jobs:
         run: |
           cd tmp
           version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'`
+          echo $version > ver.txt
           curl -o discord.zip -L https://vd.k6.tf/tracker/download/$version/base
           mkdir discordapk
           unzip discord -d discordapk
@@ -50,4 +51,6 @@ jobs:
           python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
 
       - name: Parse colors
-        run: node scripts/colorparser.js $version
+        run: |
+          version=`cat tmp/ver.txt`
+          node scripts/colorparser.js $version
