@@ -5,10 +5,24 @@ on: workflow_dispatch
 jobs:
   runner:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - name: Prepare environment
-        run: mkdir tmp
+      - uses: actions/checkout@v3
+        name: Prepare environment
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: mkdir tmp
+
+      - name: Install PNPM deps
+        run: |
+          npm i -g pnpm
+          pnpm i
 
       - name: Download hermes-dec
         run: |
@@ -18,18 +32,12 @@ jobs:
       - name: Download latest Discord APK
         run: |
           version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'`
-          curl -o discord.zip https://vd.k6.tf/tracker/download/$version/base
+          curl -o discord.zip -L https://vd.k6.tf/tracker/download/$version/base
           mkdir discordapk
           unzip discord -d discordapk
           rm discord.zip
 
       - name: Use hermes to decompile Discord APK
-        run: |
-          cd discordapk
-          ../hermes-dec/hbc-decompiler assets/index.android.bundle ../decompiled.js
+        run: python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
 
-      - name: yay ur done for now
-        run: |
-          cd ..
-          rm -rf tmp
-          echo yippeee!!
+      - name:

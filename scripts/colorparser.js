@@ -9,8 +9,16 @@
  */
 
 import { readFile } from "fs/promises";
+import { cwrite } from "./colorwriter.js";
 
-const lines = (await readFile("./tmp/decompiled.js", "utf8"))
+const rawVer = Number(process.argv[2]);
+if (Number.isNaN(rawVer) || !process.argv[2])
+  throw new Error("No version specified blehh");
+
+const rev = rawVer.toString();
+const ver = `${rev.slice(0, -3)}.${Number(rev.slice(-2))}`;
+
+const lines = (await readFile("./decompiled.js", "utf8"))
   .split("\n")
   .map((x) => x.trim());
 
@@ -70,4 +78,4 @@ if (!rawObj) throw new Error("RAW: no rawObj!!!");
 
 const rawColors = eval(`(${rawObj})`);
 
-console.log(rawColors);
+cwrite(ver, semanticColors, rawColors);

@@ -8,7 +8,7 @@ const folders = changes
     const change = x.slice(0, 2);
     const file = x.slice(3);
 
-    return ["??", "A "].includes(change) && file.startsWith("colors/");
+    return ["??", "A ", "U "].includes(change) && file.startsWith("colors/");
   })
   .map((x) => x.slice(3).split("/")[1])
   .filter((x, i, a) => !a.slice(0, i).includes(x) && x !== "latest");
