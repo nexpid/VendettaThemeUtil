@@ -3,7 +3,7 @@ name: Runner
 on: workflow_dispatch
 
 jobs:
-  check:
+  runner:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
           version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'`
           curl -o discord.zip https://vd.k6.tf/tracker/download/$version/base
           mkdir discordapk
-          unzip discord.zip -d discordapk
+          unzip discord -d discordapk
           rm discord.zip
 
       - name: Use hermes to decompile Discord APK
