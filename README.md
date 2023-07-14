@@ -1,5 +1,5 @@
 <div align="center">
-    <a href="https://github.com/Gabe616/VendettaThemeUtil">
+    <a href="https://github.com/Gabe616/VendettaThemeUtil/stargazers">
         <img alt="GitHub stars" src="https://img.shields.io/github/stars/Gabe616/VendettaThemeUtil?style=for-the-badge&color=BBDEFB&labelColor=263238">
     </a>
     <h1>Vendetta Theme Util</h1>
