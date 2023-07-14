@@ -1,0 +1,35 @@
+name: Runner
+
+on: workflow_dispatch
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Prepare environment
+        run: mkdir tmp
+
+      - name: Download hermes-dec
+        run: |
+          cd tmp
+          git clone https://github.com/P1sec/hermes-dec
+
+      - name: Download latest Discord APK
+        run: |
+          $version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*"' | grep -o '[0-9]*'`
+          curl -o discord.zip https://vd.k6.tf/tracker/download/$version/base
+          mkdir discordapk
+          unzip discord.zip -d discordapk
+          rm discord.zip
+
+      - name: Use hermes to decompile Discord APK
+        run: |
+          cd discordapk
+          ../hermes-dec/hbc-decompiler assets/index.android.bundle ../decompiled.js
+
+      - name: yay ur done for now
+        run: |
+          cd ..
+          rm -rf tmp
+          echo yippeee!!
