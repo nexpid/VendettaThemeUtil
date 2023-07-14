@@ -29,7 +29,7 @@ export async function cwrite(version, semantic, raw) {
   };
 
   const writeTo = async (dir) => {
-    const pat = join("../colors", dir);
+    const pat = join("colors", dir);
     if (!existsSync(pat)) await mkdir(pat);
     for (const [x, y] of Object.entries(files))
       await writeFile(join(pat, `${x}.json`), y);

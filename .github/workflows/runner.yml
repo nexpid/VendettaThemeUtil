@@ -50,4 +50,4 @@ jobs:
           python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
 
       - name: Parse colors
-        run: node ../scripts/colorparser.js $version
+        run: node scripts/colorparser.js $version
