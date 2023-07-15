@@ -9,7 +9,7 @@
  */
 
 import { readFile } from "fs/promises";
-import { cwrite } from "./colorwriter.js";
+import { cwrite } from "./writer.js";
 
 const rawVer = Number(process.argv[2]);
 if (Number.isNaN(rawVer) || !process.argv[2])

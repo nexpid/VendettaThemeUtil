@@ -15,7 +15,7 @@
   "type": "module",
   "private": false,
   "dependencies": {
-    "ws": "^8.13.0",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "ws": "^8.13.0"
   }
 }
