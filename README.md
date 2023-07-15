@@ -9,7 +9,7 @@
 
 ## Table of Contents
 
-- [Vendetta Theme Util](#)
+- [Vendetta Theme Util](#vendetta-theme-util)
     - [Table of Contents](#table-of-contents)
     - [Colors](#colors)
 
