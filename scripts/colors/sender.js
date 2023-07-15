@@ -1,5 +1,5 @@
 import { join } from "path";
-import getchanges from "../getchanges.js";
+import getchanges, { only } from "../getchanges.js";
 import { readFile, readdir } from "fs/promises";
 
 const user = {
@@ -14,7 +14,7 @@ const types = {
 const webhook = process.argv.slice(2).join(" ");
 const thread = undefined;
 
-const folders = getchanges()
+const folders = only(getchanges())
   .filter((x) => ["A", "??"].includes(x[0]))
   .map((x) => x[1]);
 

@@ -1,7 +1,8 @@
 import { writeFile } from "fs/promises";
-import getchanges from "./getchanges.js";
+import getchanges, { only } from "./getchanges.js";
 
-const folders = getchanges();
+const changes = getchanges();
+const folders = only(changes);
 
 const dchanges = {
   added: folders.filter((x) => ["A", "??"].includes(x[0])).map((x) => x[1]),
