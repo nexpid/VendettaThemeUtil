@@ -28,7 +28,7 @@ jobs:
       - name: Install PNPM deps
         run: |
           npm i -g pnpm
-          pnpm i
+          pnpm i --prod
 
       - name: Download hermes-dec
         run: |
