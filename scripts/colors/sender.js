@@ -12,7 +12,7 @@ const types = {
 };
 
 const webhook = process.argv.slice(2).join(" ");
-const thread = undefined;
+const thread = "1129770152112697424";
 
 const folders = only(getchanges())
   .filter((x) => ["A", "??"].includes(x[0]))
@@ -35,10 +35,19 @@ for (const x of folders) {
   const fd = new FormData();
   for (const i in files) {
     const file = files[i];
-    const contentType = types[file.split(".").slice(-1)[0]];
+    const guh = file.split(".");
+
+    const ext = guh.slice(-1)[0];
+    const name = guh.slice(0, -1).join(".");
+
+    const contentType = types[ext];
     const content = await readFile(join("../colors", x, file));
 
-    fd.append(`files[${i}]`, new Blob([content], { type: contentType }), file);
+    fd.append(
+      `files[${i}]`,
+      new Blob([content], { type: contentType }),
+      `${name}-${x}.${ext}`
+    );
   }
 
   fd.append(
@@ -59,8 +68,11 @@ for (const x of folders) {
     })
   ).json();
 
-  if (response.id) lastMessage = response.id;
-  else count++;
+  if (response.id) {
+    lastMessage = response.id;
+    count++;
+  } else
+    console.log(`Failed to send message (${x})! ${JSON.stringify(response)}`);
 }
 
 console.log(`Sent messages (${count})`);
