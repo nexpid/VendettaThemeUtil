@@ -8,9 +8,9 @@ const folders = changes
     const change = x.slice(0, 2);
     const file = x.slice(3);
 
-    return ["??", "A ", "U "].includes(change) && file.startsWith("colors/");
+    return ["??", "A ", " M"].includes(change) && file.startsWith("colors/");
   })
   .map((x) => x.slice(3).split("/")[1])
   .filter((x, i, a) => !a.slice(0, i).includes(x) && x !== "latest");
 
-await writeFile("./scripts/commit.txt", `chore: add ${folders.join(", ")}`);
+await writeFile("./commit.txt", `chore: add ${folders.join(", ")}`);
