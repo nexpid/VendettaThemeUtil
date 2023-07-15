@@ -1,19 +1,17 @@
 <div align="center">
+    <h1 id="vendetta-theme-util">Vendetta Theme Util</h1>
     <a href="https://github.com/Gabe616/VendettaThemeUtil/stargazers">
         <img alt="GitHub stars" src="https://img.shields.io/github/stars/Gabe616/VendettaThemeUtil?style=for-the-badge&color=BBDEFB&labelColor=263238">
     </a>
-    <h1>Vendetta Theme Util</h1>
-    <br/>
+    </br>
+    Various utilities for Vendetta theme makers. Consider supporting this repo by starring it!
 </div>
 
 ## Table of Contents
 
-1. [Info](#info)
-2. [Colors](#colors)
-
-## Info
-
-Various utilities for Vendetta theme makers. Consider supporting this repo by starring it!
+- [Vendetta Theme Util](#)
+    - [Table of Contents](#table-of-contents)
+    - [Colors](#colors)
 
 ## Colors
 
