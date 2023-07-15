@@ -17,5 +17,8 @@
   "dependencies": {
     "prettier": "^3.0.0",
     "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "node-cron": "^3.0.2"
   }
 }
