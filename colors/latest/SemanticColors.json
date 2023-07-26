@@ -3051,6 +3051,20 @@
       "dark": "#ffffff"
     }
   },
+  "STATUS_SPEAKING": {
+    "source": {
+      "darker": "GREEN_360",
+      "amoled": "GREEN_360",
+      "light": "GREEN_360",
+      "dark": "GREEN_360"
+    },
+    "colors": {
+      "darker": "#23a55a",
+      "amoled": "#23a55a",
+      "light": "#23a55a",
+      "dark": "#23a55a"
+    }
+  },
   "STATUS_WARNING": {
     "source": {
       "darker": "YELLOW_300",
