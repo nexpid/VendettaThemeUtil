@@ -1,6 +1,11 @@
 name: Runner
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version
+        required: false
 
 jobs:
   runner:
@@ -38,8 +43,11 @@ jobs:
       - name: Download latest Discord APK
         run: |
           cd tmp
-          version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'`
-          echo $version > ver.txt
+          if [ -z "${{ github.event.inputs.version }}" ]; then
+            export version="${{ github.event.inputs.version }}"
+          else
+            export version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'`
+          fi
           curl -o discord.zip -L https://vd.k6.tf/tracker/download/$version/base
           mkdir discordapk
           unzip discord -d discordapk
@@ -51,9 +59,7 @@ jobs:
           python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
 
       - name: Parse colors
-        run: |
-          version=`cat tmp/ver.txt`
-          node scripts/colors/parser.js $version
+        run: node scripts/colors/parser.js $VERSION
 
       - name: Commit changes
         env:
