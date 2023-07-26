@@ -44,10 +44,11 @@ jobs:
         run: |
           cd tmp
           if [ -z "${{ github.event.inputs.version }}" ]; then
-            echo version="${{ github.event.inputs.version }}" >> $GITHUB_ENV
+            version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'` >> $GITHUB_ENV
           else
-            echo version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'` >> $GITHUB_ENV
+            version="${{ github.event.inputs.version }}"
           fi
+          echo version=$version >> $GITHUB_ENV
           curl -o discord.zip -L https://vd.k6.tf/tracker/download/$version/base
           mkdir discordapk
           unzip discord -d discordapk
