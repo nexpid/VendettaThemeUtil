@@ -1,0 +1,16 @@
+name: Testing
+
+on: workflow_dispatch
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Test 1
+        run: export test="12345678"
+
+      - name: Test 2
+        run: echo $test
