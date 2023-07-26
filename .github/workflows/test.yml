@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Test 1
-        run: export test="12345678"
+        run: echo test="12346546547897897" >> $GITHUB_ENV
 
       - name: Test 2
         run: echo $test
