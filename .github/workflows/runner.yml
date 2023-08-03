@@ -66,10 +66,7 @@ jobs:
           cd tmp
           python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
 
-      - name: Prepare LFS (0/2)
-        run: git lfs track ".*js"
-
-      - name: Parse colors (1/2)
+      - name: Parse colors (1/2.5)
         env:
           webhookURL: ${{ secrets.VENDETTA_WEBHOOK }}
         run: |
@@ -84,7 +81,12 @@ jobs:
           msg=`cat commit.txt`
           git commit -m "$msg" | true
 
-      - name: Save decompiled (2/2)
+      - name: Save decompiled prepare LFS (2/2.5)
+        run: |
+          git lfs track ".*js"
+          git add .gitattributes
+
+      - name: Save decompiled (2.5/2.5)
         run: |
           node scripts/decompiled/parser.js $version
 
