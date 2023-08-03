@@ -30,7 +30,7 @@ Various utilities for Vendetta theme makers. Consider supporting this repo by st
 
 ## Colors
 
-Discord's RawColors and SemanticColors are being tracked in the [colors/](colors/) folder.  
+Discord's RawColors and SemanticColors are being tracked in the [colors/](https://github.com/Gabe616/VendettaThemeUtil/tree/main/colors) folder.  
 Here are links to the newest versions:
 
 - [RawColors.json](colors/latest/RawColors.json)
@@ -38,7 +38,7 @@ Here are links to the newest versions:
 
 ## Decompiled
 
-Decompiles Discord's source code and saves it in [decompiled/](decompiled/).
+Decompiles Discord's source code and saves it in [decompiled/](https://github.com/Gabe616/VendettaThemeUtil/tree/main/decompiled).
 Link to the latest file:
 
 - [latest.js](decompiled/latest.js)
