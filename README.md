@@ -13,7 +13,7 @@
 	</a>
 </div>
 <div align="center">
-    <h1>🔧 Vendetta Theme Util</h1>
+    <h1>Vendetta Theme Util</h1>
 </div>
 
 ## Table of Contents
