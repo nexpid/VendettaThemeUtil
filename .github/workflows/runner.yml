@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         name: Prepare environment 1
+        with:
+          lfs: true
 
       - name: Prepare Python
         uses: actions/setup-python@v4
@@ -64,6 +66,12 @@ jobs:
           cd tmp
           python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
 
+      - name: Prepare LFS (0/2)
+        run: |
+          git lfs track colors/* decompiled/*
+          git add .gitattributes
+          git commit -m "chore(lfs): add .gitattributes" | true
+
       - name: Parse colors (1/2)
         env:
           webhookURL: ${{ secrets.VENDETTA_WEBHOOK }}
@@ -91,4 +99,4 @@ jobs:
           git commit -m "$msg" | true
 
       - name: Commit changes
-        run: git push
+        run: git push origin main
