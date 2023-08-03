@@ -67,10 +67,7 @@ jobs:
           python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
 
       - name: Prepare LFS (0/2)
-        run: |
-          git lfs track colors/* decompiled/*
-          git add .gitattributes
-          git commit -m "chore(lfs): add .gitattributes" | true
+        run: git lfs track ".*js"
 
       - name: Parse colors (1/2)
         env:
