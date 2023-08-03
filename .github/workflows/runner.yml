@@ -83,7 +83,7 @@ jobs:
 
       - name: Save decompiled prepare LFS (2/2.5)
         run: |
-          git lfs track ".*js"
+          git lfs track "*.js"
           git add .gitattributes
 
       - name: Save decompiled (2.5/2.5)
