@@ -10,11 +10,11 @@ export function only(x) {
   );
 }
 
-export default function () {
+export default function (folder) {
   const changes = execSync("git status -z -uall")
     .toString()
     .split("\0")
-    .filter((x) => x.slice(3).startsWith("colors/"));
+    .filter((x) => x.slice(3).startsWith(`${folder}/`));
 
-  return changes.map((x) => [x.slice(0, 2).trim(), x.slice(3).split("/")[1]]);
+  return changes.map((x) => [x.slice(0, 2), x.slice(3).split("/")[1]]);
 }

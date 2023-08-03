@@ -15,7 +15,7 @@ const webhook = process.argv.slice(2).join(" ");
 const thread = "1129770152112697424";
 
 const folders = only(getchanges())
-  .filter((x) => ["A", "??"].includes(x[0]))
+  .filter((x) => ["A", "??"].includes(x[0].trim()))
   .map((x) => x[1]);
 
 let count = 0;

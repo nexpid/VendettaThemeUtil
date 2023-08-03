@@ -1,19 +1,24 @@
 import { writeFile } from "fs/promises";
 import getchanges, { only } from "./getchanges.js";
 
-const changes = getchanges();
+const folder = process.argv[2];
+if (typeof folder !== "string") throw new Error("No folder specified blehh");
+
+const changes = getchanges(folder);
 const folders = only(changes);
 
 const dchanges = {
-  added: folders.filter((x) => ["A", "??"].includes(x[0])).map((x) => x[1]),
-  updated: folders.filter((x) => x[0] === "M").map((x) => x[1]),
-  deleted: folders.filter((x) => x[0] === "D").map((x) => x[1]),
+  added: folders
+    .filter((x) => ["A", "??"].includes(x[0].trim()))
+    .map((x) => x[1]),
+  updated: folders.filter((x) => x[0].trim() === "M").map((x) => x[1]),
+  deleted: folders.filter((x) => x[0].trim() === "D").map((x) => x[1]),
 };
 
 await writeFile(
   "./commit.txt",
-  `chore: ${Object.entries(dchanges)
+  `chore(${folder}): ${Object.entries(dchanges)
     .filter((x) => x[1][0])
     .map((x) => `${x[0]} ${x[1].join(", ")}`)
-    .join(", ")}\n${changes.map((x) => `- ${x}`).join("\n")}`
+    .join(", ")}\n${changes.map((x) => `${x.join(" ")}`).join("\n")}`
 );
