@@ -184,13 +184,13 @@
   "BACKGROUND_MOBILE_PRIMARY": {
     "source": {
       "darker": "PRIMARY_600",
-      "amoled": "PRIMARY_600",
+      "amoled": "BLACK_500",
       "light": "PRIMARY_100",
       "dark": "PRIMARY_600"
     },
     "colors": {
       "darker": "#313338",
-      "amoled": "#313338",
+      "amoled": "#000000",
       "light": "#f9f9f9",
       "dark": "#313338"
     }
@@ -198,13 +198,13 @@
   "BACKGROUND_MOBILE_SECONDARY": {
     "source": {
       "darker": "PRIMARY_630",
-      "amoled": "PRIMARY_630",
+      "amoled": "DONTUSE_26",
       "light": "WHITE_500",
       "dark": "PRIMARY_630"
     },
     "colors": {
       "darker": "#2b2d31",
-      "amoled": "#2b2d31",
+      "amoled": "#08080b",
       "light": "#ffffff",
       "dark": "#2b2d31"
     }
@@ -240,13 +240,13 @@
   "BACKGROUND_MODIFIER_ACTIVE": {
     "source": {
       "darker": "PRIMARY_500",
-      "amoled": "PRIMARY_500",
+      "amoled": "DONTUSE_15",
       "light": "PRIMARY_400",
       "dark": "PRIMARY_500"
     },
     "colors": {
       "darker": "#4e5058",
-      "amoled": "#4e5058",
+      "amoled": "#383949",
       "light": "#80848e",
       "dark": "#4e5058"
     }
@@ -268,13 +268,13 @@
   "BACKGROUND_MODIFIER_SELECTED": {
     "source": {
       "darker": "PRIMARY_500",
-      "amoled": "PRIMARY_500",
+      "amoled": "DONTUSE_15",
       "light": "PRIMARY_400",
       "dark": "PRIMARY_500"
     },
     "colors": {
       "darker": "#4e5058",
-      "amoled": "#4e5058",
+      "amoled": "#383949",
       "light": "#80848e",
       "dark": "#4e5058"
     }
@@ -1150,13 +1150,13 @@
   "CHAT_BACKGROUND": {
     "source": {
       "darker": "PRIMARY_600",
-      "amoled": "PRIMARY_600",
+      "amoled": "BLACK_500",
       "light": "WHITE_500",
       "dark": "PRIMARY_600"
     },
     "colors": {
       "darker": "#313338",
-      "amoled": "#313338",
+      "amoled": "#000000",
       "light": "#ffffff",
       "dark": "#313338"
     }
@@ -1570,13 +1570,13 @@
   "HOME_BACKGROUND": {
     "source": {
       "darker": "PRIMARY_645",
-      "amoled": "PRIMARY_645",
+      "amoled": "PRIMARY_760",
       "light": "PRIMARY_100",
       "dark": "PRIMARY_645"
     },
     "colors": {
       "darker": "#282a2e",
-      "amoled": "#282a2e",
+      "amoled": "#161719",
       "light": "#f9f9f9",
       "dark": "#282a2e"
     }
