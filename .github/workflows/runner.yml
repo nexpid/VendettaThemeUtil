@@ -7,6 +7,9 @@ on:
         description: Version
         required: false
 
+concurrency:
+  group: ${{ github.ref }}
+
 jobs:
   decompiler:
     runs-on: ubuntu-latest
@@ -15,25 +18,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        name: Prepare environment 1
 
-      - name: Prepare Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: Prepare NodeJS
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
 
       - name: Prepare environment
         run: mkdir tmp
 
-      - name: Prepare git
+      - name: Configure git
         run: |
-          git config --global user.name "actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Install PNPM deps
         run: |
