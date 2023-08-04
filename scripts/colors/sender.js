@@ -12,9 +12,11 @@ const types = {
 };
 
 const webhook = process.argv.slice(2).join(" ");
+if (!webhook) throw new Error("No webhook specified blehh");
+
 const thread = "1129770152112697424";
 
-const folders = only(getchanges())
+const folders = only(getchanges("colors"))
   .filter((x) => ["A", "??"].includes(x[0].trim()))
   .map((x) => x[1]);
 
