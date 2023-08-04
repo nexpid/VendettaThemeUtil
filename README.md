@@ -22,7 +22,6 @@
   - [Table of Contents](#table-of-contents)
   - [Info](#info)
   - [Colors](#colors)
-  - [Decompiled](#decompiled)
 
 ## Info
 
@@ -35,10 +34,3 @@ Here are links to the newest versions:
 
 - [RawColors.json](colors/latest/RawColors.json)
 - [SemanticColors.json](colors/latest/SemanticColors.json)
-
-## Decompiled
-
-Decompiles Discord's source code and saves it in [decompiled/](https://github.com/Gabe616/VendettaThemeUtil/tree/main/decompiled).
-Link to the latest file:
-
-- [latest.js](decompiled/latest.js)
