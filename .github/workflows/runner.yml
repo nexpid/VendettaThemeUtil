@@ -11,7 +11,7 @@ concurrency:
   group: ${{ github.ref }}
 
 jobs:
-  decompiler:
+  runner:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -64,7 +64,7 @@ jobs:
           cd tmp
           python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
 
-      - name: Parse colors (1/2)
+      - name: Parse colors (1/1)
         env:
           webhookURL: ${{ secrets.VENDETTA_WEBHOOK }}
         run: |
