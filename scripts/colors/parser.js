@@ -22,10 +22,10 @@ const lines = (await readFile("./tmp/decompiled.js", "utf8"))
   .split("\n")
   .map((x) => x.trim());
 
-const lookForDefinition = (vrb, before = lines.length) => {
+const lookForDefinition = (vrb, before = lines.length, useLine) => {
   for (let i = before; i >= 0; i--) {
     const mat = lines[i].match(new RegExp(`${vrb} = `));
-    if (mat?.[0]) return lines[i];
+    if (mat?.[0]) return useLine ? i : lines[i];
   }
 };
 
@@ -48,35 +48,46 @@ for (let i = semStartLine; i < lines.length; i++) {
     const [_, key, vrb] = l.match(
       new RegExp(`^${semHookVar}\\['(.*?(?='))'\\] = (r[0-9]+)`)
     );
-    const matcher = new RegExp(`\\(${vrb}, (r[0-9]+), (r[0-9]+)\\)`);
+
+    const definitionMatcher = new RegExp(
+      `(r[0-9]+) = r[0-9]+\\.bind\\(r[0-9]+\\)\\(${vrb}`
+    );
+    const shadeMatch = /= r[0-9]+\.([A-Z]*(?=;))/;
     const definitions = {};
+
     for (let line = i; line >= 0; line--) {
       const ln = lines[line];
       if (!ln.includes(vrb)) continue;
-      const thingy = ln.match(matcher);
+      const [_, clrVrb] = ln.match(definitionMatcher) ?? [];
 
       if (ln.startsWith(`${vrb} =`)) break;
-      else if (thingy?.[1]) {
-        const dumLn = lookForDefinition(thingy[2], line - 1);
-        const dum = dumLn?.match(/= (.*(?=;))/)?.[1];
-        if (!dum)
+      else if (clrVrb) {
+        const clrLnI = lookForDefinition(clrVrb, line - 1, true);
+        const clrLn = lines[clrLnI];
+        const clr = clrLn?.match(/= (.*(?=;))/)?.[1];
+        if (!clr)
           throw new Error(
-            `SEMANTIC: ${key} (${vrb}): no dum (${dumLn}, ln ${lines.findIndex(
-              (x) => x === dumLn
-            )})`
-          );
-        const whatisitLn = lookForDefinition(thingy[1], line - 1);
-        const whatisit = whatisitLn
-          ?.match(/= r[0-9]+\.(.*(?=;))/)?.[1]
-          ?.toLowerCase();
-        if (!whatisit)
-          throw new Error(
-            `SEMANTIC: ${key} (${vrb}): no whatisit (${whatisitLn}, ln ${lines.findIndex(
-              (x) => x === whatisitLn
-            )})`
+            `SEMANTIC: ${key} (${vrb}): no clr ("${clrLn}", ln ${clrLnI + 1})`
           );
 
-        definitions[whatisit] = eval(`(${dum})`);
+        let shade;
+        for (
+          let shadeLine = clrLnI - 1;
+          shadeLine >= 0 && !shade;
+          shadeLine--
+        ) {
+          const shdLn = lines[shadeLine];
+          if (shdLn.match(shadeMatch)?.[1])
+            shade = shdLn.match(shadeMatch)[1].toLowerCase();
+        }
+        if (!shade)
+          throw new Error(
+            `SEMANTIC: ${key} (${vrb}): no shade for ${key} (clr ${clr}, ln ${
+              clrLnI + 1
+            })`
+          );
+
+        definitions[shade] = eval(`(${clr})`);
       }
     }
 
