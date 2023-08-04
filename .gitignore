@@ -2,3 +2,4 @@ node_modules
 tmp
 pnpm-lock.yaml
 scripts/autochecker/lastVersion.txt
+.env
