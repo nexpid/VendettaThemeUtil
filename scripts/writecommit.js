@@ -20,5 +20,5 @@ await writeFile(
   `chore(${folder}): ${Object.entries(dchanges)
     .filter((x) => x[1][0])
     .map((x) => `${x[0]} ${x[1].join(", ")}`)
-    .join(", ")}\n${changes.map((x) => `${x.join(" ")}`).join("\n")}`
+    .join(", ")}\n${folders.map((x) => `${x.join(" ")}`).join("\n")}`
 );
