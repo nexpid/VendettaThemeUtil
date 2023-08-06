@@ -54,28 +54,46 @@ jobs:
             version="${{ github.event.inputs.version }}"
           fi
           echo version=$version >> $GITHUB_ENV
-          curl -o discord.zip -L https://vd.k6.tf/tracker/download/$version/base
+
+          curl -o discord_base.zip -L https://vd.k6.tf/tracker/download/$version/base
+          curl -o discord_xxhdpi.zip -L https://vd.k6.tf/tracker/download/$version/config.xxhdpi
+
           mkdir discordapk
-          unzip discord -d discordapk
-          rm discord.zip
+
+          unzip discord_base -d discordapk/base
+          unzip discord_xxhdpi -d discordapk/xxhdpi
+
+          rm discord_base.zip
+          rm discord_xxhdpi.zip
 
       - name: Use hermes to decompile Discord APK
         run: |
           cd tmp
-          python hermes-dec/hbc_decompiler.py discordapk/assets/index.android.bundle decompiled.js
+          python hermes-dec/hbc_decompiler.py discordapk/base/assets/index.android.bundle decompiled.js
 
-      - name: Parse colors (1/1)
+      - name: Parse colors (1/2)
         env:
           webhookURL: ${{ secrets.VENDETTA_WEBHOOK }}
         run: |
           node scripts/colors/parser.js $version
 
-          cd tmp
-          git add ../colors
+          git add colors
 
           node --no-warnings ../scripts/colors/sender.js $webhookURL
 
+          cd tmp
           node ../scripts/writecommit.js colors
+          msg=`cat commit.txt`
+          git commit -m "$msg" | true
+
+      - name: Parse icons (2/2)
+        run: |
+          node scripts/icons/parser.js $version
+
+          git add icons
+
+          cd tmp
+          node ../scripts/writecommit.js icons
           msg=`cat commit.txt`
           git commit -m "$msg" | true
 
