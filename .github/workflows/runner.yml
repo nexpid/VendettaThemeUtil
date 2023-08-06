@@ -79,7 +79,7 @@ jobs:
 
           git add colors
 
-          node --no-warnings ../scripts/colors/sender.js $webhookURL
+          node --no-warnings scripts/colors/sender.js $webhookURL
 
           cd tmp
           node ../scripts/writecommit.js colors
