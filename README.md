@@ -22,6 +22,7 @@
   - [Table of Contents](#table-of-contents)
   - [Info](#info)
   - [Colors](#colors)
+  - [Icons](#icons)
 
 ## Info
 
@@ -34,3 +35,8 @@ Here are links to the newest versions:
 
 - [RawColors.json](colors/latest/RawColors.json)
 - [SemanticColors.json](colors/latest/SemanticColors.json)
+
+## Icons
+
+Discord's icons are being tracked in the [icons/](https://github.com/Gabe616/VendettaThemeUtil/tree/main/icons) folder.  
+[Here](https://github.com/Gabe616/VendettaThemeUtil/tree/main/icons/latest) is the link to the latest icons.
