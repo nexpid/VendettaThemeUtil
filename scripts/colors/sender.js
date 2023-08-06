@@ -43,7 +43,7 @@ for (const x of folders) {
     const name = guh.slice(0, -1).join(".");
 
     const contentType = types[ext];
-    const content = await readFile(join("../colors", x, file));
+    const content = await readFile(join("colors", x, file));
 
     fd.append(
       `files[${i}]`,
