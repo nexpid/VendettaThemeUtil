@@ -64,7 +64,7 @@ for (let i = semStartLine; i < lines.length; i++) {
       else if (clrVrb) {
         const clrLnI = lookForDefinition(clrVrb, line - 1, true);
         const clrLn = lines[clrLnI];
-        const clr = clrLn?.match(/= (.*(?=;))/)?.[1];
+        const clr = clrLn?.match(/= ([^;]+);$/)?.[1];
         if (!clr)
           throw new Error(
             `SEMANTIC: ${key} (${vrb}): no clr ("${clrLn}", ln ${clrLnI + 1})`
@@ -87,7 +87,7 @@ for (let i = semStartLine; i < lines.length; i++) {
             })`
           );
 
-        definitions[shade] = eval(`(${clr})`);
+        definitions[shade] = (0, eval)(`(${clr})`);
       }
     }
 
@@ -106,6 +106,6 @@ const rawObj = lookForDefinition(rawHookVar, rawHookLine)?.match(
 )?.[1];
 if (!rawObj) throw new Error("RAW: no rawObj!!!");
 
-const rawColors = eval(`(${rawObj})`);
+const rawColors = (0, eval)(`(${rawObj})`);
 
 cwrite(ver, semanticColors, rawColors);
