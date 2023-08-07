@@ -11,6 +11,10 @@
 	<a href="https://discord.gg/n9QQ4XhhJP">
 		<img alt="Discord members" src="https://img.shields.io/discord/1015931589865246730?style=for-the-badge&color=eba0ac&labelColor=1e1e2e&logo=discord&logoColor=fff">
 	</a>
+	<a href="https://github.com/Gabe616/VendettaThemeUtil/actions/workflows/runner.yml">
+		<img alt="Runner status" src="https://img.shields.io/github/actions/workflow/status/Gabe616/VendettaThemeUtil/runner.yml
+?style=for-the-badge&color=eba0ac&labelColor=1e1e2e&logoColor=fff">
+	</a>
 </div>
 <div align="center">
     <h1>Vendetta Theme Util</h1>
