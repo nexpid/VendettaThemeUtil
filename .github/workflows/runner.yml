@@ -90,7 +90,7 @@ jobs:
         run: |
           node scripts/icons/parser.js $version
 
-          git add icons
+          git add icons -f
 
           cd tmp
           node ../scripts/writecommit.js icons
