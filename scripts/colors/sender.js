@@ -23,7 +23,7 @@ const folders = only(getchanges("colors"))
 let count = 0;
 let lastMessage;
 for (const x of folders) {
-  const files = await readdir(join("../colors", x));
+  const files = await readdir(join("colors", x));
   console.log(
     `Sending ${x} — ${files.join(", ")}${
       lastMessage ? ` (followup to ${lastMessage})` : ""
