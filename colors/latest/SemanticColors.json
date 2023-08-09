@@ -377,20 +377,6 @@
       "dark": "#1e1f22"
     }
   },
-  "BLUR_FALLBACK_PRESSED": {
-    "source": {
-      "darker": "DONTUSE_17",
-      "amoled": "DONTUSE_19",
-      "light": "PRIMARY_530",
-      "dark": "PRIMARY_730"
-    },
-    "colors": {
-      "darker": "#2b2c38",
-      "amoled": "#21222b",
-      "light": "#41434a",
-      "dark": "#1a1b1e"
-    }
-  },
   "BORDER_STRONG": {
     "source": {
       "darker": "DONTUSE_11",
@@ -1933,16 +1919,16 @@
   },
   "LEGACY_ANDROID_BLUR_OVERLAY_DEFAULT": {
     "source": {
-      "darker": "PRIMARY_660",
-      "amoled": "PRIMARY_660",
-      "light": "PRIMARY_130",
-      "dark": "PRIMARY_660"
+      "darker": "BLACK_500",
+      "amoled": "BLACK_500",
+      "light": "WHITE_500",
+      "dark": "BLACK_500"
     },
     "colors": {
-      "darker": "#232428",
-      "amoled": "#232428",
-      "light": "#f2f3f5",
-      "dark": "#232428"
+      "darker": "#000000",
+      "amoled": "#000000",
+      "light": "#ffffff",
+      "dark": "#000000"
     }
   },
   "LEGACY_ANDROID_BLUR_OVERLAY_ULTRA_THIN": {
