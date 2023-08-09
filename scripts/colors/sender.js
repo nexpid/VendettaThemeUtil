@@ -81,7 +81,7 @@ for (const x of folders) {
 
   count++;
 
-  const diff = execSync(`git diff --cached colors/${x}`)
+  const diff = execSync("git diff --cached colors/latest")
     .toString()
     .replace(/\r/g, "")
     .split("\n");
@@ -103,7 +103,7 @@ for (const x of folders) {
     }
   }
 
-  const tooLarge = Object.values(changes).join("\n").length > 100;
+  const tooLarge = Object.values(changes).join("\n").split("\n").length > 50;
 
   const fdDiff = new FormData();
   if (!tooLarge)
