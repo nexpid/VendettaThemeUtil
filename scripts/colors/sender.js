@@ -81,12 +81,10 @@ for (const x of folders) {
 
   count++;
 
-  const diff = execSync("git diff --cached colors/latest")
-    .toString()
-    .replace(/\r/g, "")
-    .split("\n");
+  const rawDiff = execSync("git diff --cached colors/latest").toString();
+  const diff = rawDiff.replace(/\r/g, "").split("\n");
 
-  const changes = {};
+  const changes = [];
   for (let i = 0; i < diff.length; i++) {
     const l = diff[i];
     if (l.startsWith("diff --git")) {
@@ -97,18 +95,23 @@ for (const x of folders) {
         target++;
       }
 
-      changes[file.split(".").slice(0, -1).join(".")] = diff
-        .slice(i + 4, target)
-        .join("\n");
+      changes.push([
+        file.split(".").slice(0, -1).join("."),
+        diff.slice(i + 4, target).join("\n"),
+      ]);
     }
   }
 
-  const tooLarge = Object.values(changes).join("\n").split("\n").length > 50;
+  const tooLarge =
+    changes
+      .map((x) => x[1])
+      .join("\n")
+      .split("\n").length >= 30;
 
   const fdDiff = new FormData();
-  if (!tooLarge)
-    for (let i = 0; i < Object.keys(changes).length; i++) {
-      const [name, content] = Object.entries(changes);
+  if (tooLarge)
+    for (let i = 0; i < changes.length; i++) {
+      const [name, content] = changes[i];
 
       fdDiff.append(
         `files[${i}]`,
@@ -122,11 +125,11 @@ for (const x of folders) {
     JSON.stringify({
       content: Object.keys(changes)[0]
         ? `Color changes for **${x}**${
-            tooLarge
+            !tooLarge
               ? `:\n\n${Object.entries(changes)
                   .map((y) => `\`${y[0]}-${x}.json\` \`\`\`diff\n${y[1]}\`\`\``)
                   .join("\n")}`
-              : ""
+              : " (uploaded as files to save space)"
           }`
         : `No color changes for **${x}**!`,
       username: user.name,
