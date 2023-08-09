@@ -30,24 +30,31 @@ const lookForDefinition = (vrb, before = lines.length, useLine) => {
 };
 
 const semHook = /r[0-9]+\['SemanticColors'\] = (r[0-9]+)/;
+const rootHook = /(r[0-9]+)\[/;
 
 const semHookLine = lines.findIndex((x) => x.match(semHook)?.[1]);
 if (!semHookLine) throw new Error("Failed to find semHookLine!");
 
 const semHookVar = lines[semHookLine].match(semHook)[1];
+const semHookVarLine = lookForDefinition(semHookVar, semHookLine, true);
+if (!semHookVarLine) throw new Error("Failed to find semHookVarLine!");
 
-let semStartLine = semHookLine;
-for (; semStartLine >= 0; semStartLine--) {
-  if (lines[semStartLine - 1].startsWith(`${semHookVar} = {}`)) break;
-}
+const rootHookVar = lines[semHookLine].match(rootHook)[1];
+const rootHookVarLine = lookForDefinition(rootHookVar, semHookLine, true);
+if (!rootHookVarLine) throw new Error("Failed to find colorVarLine!");
 
 const semanticColors = {};
-for (let i = semStartLine; i < lines.length; i++) {
+for (let i = semHookVarLine; i < semHookLine; i++) {
   const l = lines[i];
   if (l.startsWith(`${semHookVar}['`)) {
-    const [_, key, vrb] = l.match(
-      new RegExp(`^${semHookVar}\\['(.*?(?='))'\\] = (r[0-9]+)`)
+    let [_, key, vrb] = l.match(
+      new RegExp(`^${semHookVar}\\['([^']+)'\\] = (r[0-9]+)`)
     );
+
+    // variable definiton fix (for ACTIVITY_CARD_BACKGROUND)
+    const vrbHook = new RegExp(`^${vrb} = (r[0-9]+)`);
+    const vrbDef = lookForDefinition(vrb, i);
+    const altVrb = vrbDef.match(vrbHook)?.[1] ?? vrb;
 
     const definitionMatcher = new RegExp(
       `(r[0-9]+) = r[0-9]+\\.bind\\(r[0-9]+\\)\\(${vrb}`
@@ -60,7 +67,7 @@ for (let i = semStartLine; i < lines.length; i++) {
       if (!ln.includes(vrb)) continue;
       const [_, clrVrb] = ln.match(definitionMatcher) ?? [];
 
-      if (ln.startsWith(`${vrb} =`)) break;
+      if (ln.startsWith(`${altVrb} =`)) break;
       else if (clrVrb) {
         const clrLnI = lookForDefinition(clrVrb, line - 1, true);
         const clrLn = lines[clrLnI];
@@ -92,10 +99,10 @@ for (let i = semStartLine; i < lines.length; i++) {
     }
 
     semanticColors[key] = definitions;
-  } else break;
+  }
 }
 
-const rawHook = /r[0-9+]\['RawColors'\] = (r[0-9]+)/;
+const rawHook = new RegExp(`${rootHookVar}\\['RawColors'\\] = (r[0-9]+)`);
 const rawHookLine = lines.findIndex((x) => x.match(rawHook)?.[1]);
 if (!rawHookLine) throw new Error("Failed to find rawHookLine!");
 
