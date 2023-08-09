@@ -49,7 +49,7 @@ jobs:
         run: |
           cd tmp
           if [ -z "${{ github.event.inputs.version }}" ]; then
-            version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'` >> $GITHUB_ENV
+            version=`curl -s "https://vd.k6.tf/tracker/index" | grep -o '"alpha":[0-9]*' | grep -o '[0-9]*'`
           else
             version="${{ github.event.inputs.version }}"
           fi
