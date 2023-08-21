@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Gabe616/VendettaThemeUtil"
+    "url": "https://github.com/nexpid/VendettaThemeUtil"
   },
   "scripts": {
     "build": "node scripts/fetchcolors.js",
     "gitpublish": "sh scripts/publish.sh",
     "push": "pnpm build & pnpm gitpublish"
   },
-  "author": "Gabe616 (https://github.com/Gabe616)",
+  "author": "nexpid (https://github.com/nexpid)",
   "license": "MIT",
   "type": "module",
   "private": false,

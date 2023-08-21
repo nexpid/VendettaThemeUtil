@@ -18,7 +18,7 @@ const ghArgs = [
   '-H "Accept: application/vnd.github+json"',
   '-H "X-GitHub-Api-Version: 2022-11-28"',
   '-F ref="main"',
-  "repos/Gabe616/VendettaThemeUtil/actions/workflows/runner.yml/dispatches",
+  "repos/nexpid/VendettaThemeUtil/actions/workflows/runner.yml/dispatches",
   "--input -",
 ];
 const runWorkflow = (ver) =>

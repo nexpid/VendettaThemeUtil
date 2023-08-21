@@ -59,7 +59,7 @@ for (const x of folders) {
   fd.append(
     "payload_json",
     JSON.stringify({
-      content: `Colors for **${x}**:\nConsider supporting me by starring [**VendettaThemeUtil**](https://github.com/Gabe616/VendettaThemeUtil/)!`,
+      content: `Colors for **${x}**:\nConsider supporting me by starring [**VendettaThemeUtil**](https://github.com/nexpid/VendettaThemeUtil/)!`,
       username: user.name,
       avatar_url: user.avatar,
       allowed_mentions: {
