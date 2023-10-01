@@ -18,7 +18,13 @@ export async function cwrite(version, semantic, raw) {
                 Object.entries(y).map((x) => [x[0], x[1].raw])
               ),
               colors: Object.fromEntries(
-                Object.entries(y).map((x) => [x[0], raw[x[1].raw]])
+                Object.entries(y).map((x) => {
+                  const alpha = Math.floor(x[1].opacity * 0xff).toString(16);
+                  return [
+                    x[0],
+                    `${raw[x[1].raw]}${alpha !== "ff" ? alpha : ""}`,
+                  ];
+                })
               ),
             },
           ])
