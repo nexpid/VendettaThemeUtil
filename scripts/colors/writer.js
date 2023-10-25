@@ -2,6 +2,7 @@ import { format } from "prettier";
 import { existsSync } from "fs";
 import { writeFile, mkdir } from "fs/promises";
 import { join } from "path";
+import symlinkDir from "symlink-dir";
 
 export async function cwrite(version, semantic, raw) {
   const files = {
@@ -34,17 +35,14 @@ export async function cwrite(version, semantic, raw) {
     ),
   };
 
-  const writeTo = async (dir) => {
-    const pat = join("colors", dir);
-    if (!existsSync(pat)) await mkdir(pat);
+  const pat = join("colors", dir);
+  if (!existsSync(pat)) await mkdir(pat);
 
-    // replaces \n to \r\n for debug purposes
-    for (const [x, y] of Object.entries(files))
-      await writeFile(join(pat, `${x}.json`), y.replace(/\n/g, "\r\n"));
+  // replaces \n to \r\n for git diff purposes
+  for (const [x, y] of Object.entries(files))
+    await writeFile(join(pat, `${x}.json`), y.replace(/\n/g, "\r\n"));
 
-    console.log(`Wrote to colors/${dir}`);
-  };
-
-  await writeTo("latest");
-  await writeTo(version);
+  console.log(`Wrote to colors/${dir}`);
+  await symlinkDir(pat, join("colors", "latest"), { overwrite: true });
+  console.log(`Created symlink colors/${version} => colors/latest`);
 }

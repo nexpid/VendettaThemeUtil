@@ -1,5 +1,6 @@
-import { readdir, readFile, copyFile, mkdir, rm, symlink } from "fs/promises";
+import { readdir, readFile, copyFile, mkdir, rm } from "fs/promises";
 import { join } from "path";
+import symlinkDir from "symlink-dir";
 
 const worker = process.argv[3] === "action";
 
@@ -85,6 +86,6 @@ for (const x of iconmap) {
   await copyFile(x.source, join(pathVer, x.icon));
 }
 
-console.log(`Wrote to ${worker ? "../" : ""}icons/${ver}`);
-await symlink(iconPaths.ver, iconPaths.latest, "dir");
+console.log(`Wrote to icons/${ver}`);
+await symlinkDir(pat, join("colors", "latest"), { overwrite: true });
 console.log(`Created symlink icons/${ver} => icons/latest`);
