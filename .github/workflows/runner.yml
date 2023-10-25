@@ -47,9 +47,8 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Install PNPM deps
-        run: |
-          npm i -g pnpm
-          pnpm i --prod
+        working-directory: main
+        run: pnpm i --prod
 
       - name: Download hermes-dec
         working-directory: tmp
