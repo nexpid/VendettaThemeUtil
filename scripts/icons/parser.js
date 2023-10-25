@@ -1,5 +1,7 @@
-import { readdir, readFile, copyFile, mkdir, rm } from "fs/promises";
+import { readdir, readFile, copyFile, mkdir, rm, symlink } from "fs/promises";
 import { join } from "path";
+
+const worker = process.argv[3] === "action";
 
 const rawVer = Number(process.argv[2]);
 if (Number.isNaN(rawVer) || !process.argv[2])
@@ -22,7 +24,9 @@ const recursive = async (dir, path) => {
 await recursive(join("tmp", "discordapk", "base"), ["base"]);
 await recursive(join("tmp", "discordapk", "xxhdpi"), ["xxhdpi"]);
 
-const lines = (await readFile("./tmp/decompiled.js", "utf8"))
+const lines = (
+  await readFile(`${worker ? "./.." : "."}/tmp/decompiled.js`, "utf8")
+)
   .split("\n")
   .map((x) => x.trim());
 
@@ -69,23 +73,18 @@ console.log(`Got ${iconmap.length} icons (${notfound} not found)`);
 console.log("Writing...");
 
 const iconPaths = {
-  ver: join("icons", ver),
-  latest: join("icons", "latest"),
+  ver: join(worker ? "../icons" : "icons", ver),
+  latest: join(worker ? "../icons" : "icons", "latest"),
 };
 
 await rm(iconPaths.ver, { recursive: true, force: true });
-await rm(iconPaths.latest, { recursive: true, force: true });
 
 for (const x of iconmap) {
   const pathVer = join(iconPaths.ver, ...x.path);
-  const pathLatest = join(iconPaths.latest, ...x.path);
-
   await mkdir(pathVer, { recursive: true });
-  await mkdir(pathLatest, { recursive: true });
-
   await copyFile(x.source, join(pathVer, x.icon));
-  await copyFile(x.source, join(pathLatest, x.icon));
 }
 
-console.log(`Wrote to icons/${ver}`);
-console.log("Wrote to icons/latest");
+console.log(`Wrote to ${worker ? "../" : ""}icons/${ver}`);
+await symlink(iconPaths.ver, iconPaths.latest, "dir");
+console.log(`Created symlink icons/${ver} => icons/latest`);
