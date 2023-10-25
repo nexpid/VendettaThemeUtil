@@ -81,7 +81,7 @@ for (const x of folders) {
 
   count++;
 
-  const rawDiff = execSync("git diff --cached colors/latest").toString();
+  const rawDiff = execSync("git diff colors/latest").toString();
   const diff = rawDiff.replace(/\r/g, "").split("\n");
 
   const changes = [];
