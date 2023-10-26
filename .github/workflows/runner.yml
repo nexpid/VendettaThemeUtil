@@ -90,7 +90,7 @@ jobs:
 
           node --no-warnings scripts/colors/sender.js $webhookURL
 
-          node scripts/writecommit.js colors
+          node scripts/writecommit.js colors action
           msg=`cat ../tmp/commit.txt`
           git commit -m "$msg" | true
 
@@ -101,7 +101,7 @@ jobs:
 
           git add . -f
 
-          node ../main/scripts/writecommit.js ""
+          node ../main/scripts/writecommit.js "" action
           msg=`cat ../tmp/commit.txt`
           git commit -m "$msg" | true
 
