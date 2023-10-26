@@ -1,6 +1,8 @@
 import { writeFile } from "fs/promises";
 import getchanges, { only } from "./getchanges.js";
 
+const worker = process.argv[3] === "action";
+
 const folder = process.argv[2];
 if (typeof folder !== "string") throw new Error("No folder specified blehh");
 
@@ -16,7 +18,7 @@ const dchanges = {
 };
 
 await writeFile(
-  "./commit.txt",
+  worker ? "./../tmp/commit.txt" : "./tmp/commit.txt",
   `chore(${folder}): ${Object.entries(dchanges)
     .filter((x) => x[1][0])
     .map((x) => `${x[0]} ${x[1].join(", ")}`)

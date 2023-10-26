@@ -11,8 +11,6 @@
 import { readFile } from "fs/promises";
 import { cwrite } from "./writer.js";
 
-const worker = process.argv[3] === "action";
-
 const rawVer = Number(process.argv[2]);
 if (Number.isNaN(rawVer) || !process.argv[2])
   throw new Error("No version specified blehh");
@@ -20,9 +18,7 @@ if (Number.isNaN(rawVer) || !process.argv[2])
 const rev = rawVer.toString();
 const ver = `${rev.slice(0, -3)}.${Number(rev.slice(-2))}`;
 
-const lines = (
-  await readFile(`${worker ? "./.." : "."}/tmp/decompiled.js`, "utf8")
-)
+const lines = (await readFile("tmp/decompiled.js", "utf8"))
   .split("\n")
   .map((x) => x.trim());
 

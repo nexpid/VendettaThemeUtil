@@ -25,9 +25,7 @@ const recursive = async (dir, path) => {
 await recursive(join("tmp", "discordapk", "base"), ["base"]);
 await recursive(join("tmp", "discordapk", "xxhdpi"), ["xxhdpi"]);
 
-const lines = (
-  await readFile(`${worker ? "./.." : "."}/tmp/decompiled.js`, "utf8")
-)
+const lines = (await readFile("tmp/decompiled.js", "utf8"))
   .split("\n")
   .map((x) => x.trim());
 
@@ -74,8 +72,8 @@ console.log(`Got ${iconmap.length} icons (${notfound} not found)`);
 console.log("Writing...");
 
 const iconPaths = {
-  ver: join(worker ? "../icons" : "icons", ver),
-  latest: join(worker ? "../icons" : "icons", "latest"),
+  ver: join("icons", ver),
+  latest: join("icons", "latest"),
 };
 
 await rm(iconPaths.ver, { recursive: true, force: true });
@@ -87,5 +85,5 @@ for (const x of iconmap) {
 }
 
 console.log(`Wrote to icons/${ver}`);
-await symlinkDir(pat, join("colors", "latest"), { overwrite: true });
+await symlinkDir(pat, iconPaths.latest, { overwrite: true });
 console.log(`Created symlink icons/${ver} => icons/latest`);

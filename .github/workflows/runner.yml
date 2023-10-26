@@ -90,22 +90,23 @@ jobs:
 
           node --no-warnings scripts/colors/sender.js $webhookURL
 
-          cd tmp
-          node ../scripts/writecommit.js colors
-          msg=`cat commit.txt`
+          node scripts/writecommit.js colors
+          msg=`cat ../tmp/commit.txt`
           git commit -m "$msg" | true
 
       - name: Parse icons (2/2)
-        working-directory: main
+        working-directory: icons
         run: |
-          node scripts/icons/parser.js $version action
+          node ../main/scripts/icons/parser.js $version action
 
-          git add icons -f
+          git add . -f
 
-          cd tmp
-          node ../scripts/writecommit.js icons
-          msg=`cat commit.txt`
+          node ../main/scripts/writecommit.js ""
+          msg=`cat ../tmp/commit.txt`
           git commit -m "$msg" | true
 
       - name: Commit changes
+        working-directory: main
         run: git push
+          cd ../icons
+          git push
