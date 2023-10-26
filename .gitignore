@@ -4,3 +4,4 @@ pnpm-lock.yaml
 scripts/autochecker/lastVersion.txt
 .env
 ./icons
+.ignored_last
