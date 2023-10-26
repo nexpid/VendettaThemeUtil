@@ -19,7 +19,7 @@ const dchanges = {
 
 await writeFile(
   worker ? "./../tmp/commit.txt" : "./tmp/commit.txt",
-  `chore(${folder}): ${Object.entries(dchanges)
+  `chore${folder !== "" ? `(${folder})` : ""}: ${Object.entries(dchanges)
     .filter((x) => x[1][0])
     .map((x) => `${x[0]} ${x[1].join(", ")}`)
     .join(", ")}\n${folders.map((x) => `${x.join(" ")}`).join("\n")}`

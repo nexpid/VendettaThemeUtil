@@ -14,7 +14,9 @@ export default function (folder) {
   const changes = execSync("git status -z -uall")
     .toString()
     .split("\0")
-    .filter((x) => x.slice(3).startsWith(`${folder}/`));
+    .filter((x) =>
+      folder !== "" ? x.slice(3).startsWith(`${folder}/`) : true
+    );
 
   return changes.map((x) => [x.slice(0, 2), x.slice(3).split("/")[1]]);
 }
