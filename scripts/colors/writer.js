@@ -37,7 +37,7 @@ export async function cwrite(version, semantic, raw) {
     ),
   };
 
-  const pat = join(worker ? "main/colors" : "colors", version);
+  const pat = join("colors", version);
   if (!existsSync(pat)) await mkdir(pat);
 
   // replaces \n to \r\n for git diff purposes
@@ -45,7 +45,7 @@ export async function cwrite(version, semantic, raw) {
     await writeFile(join(pat, `${x}.json`), y.replace(/\n/g, "\r\n"));
 
   console.log(`Wrote to colors/${version}`);
-  await symlinkDir(pat, join(worker ? "main/colors" : "colors", "latest"), {
+  await symlinkDir(pat, join("colors", "latest"), {
     overwrite: true,
   });
   console.log(`Created symlink colors/${version} => colors/latest`);
