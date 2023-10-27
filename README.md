@@ -12,8 +12,7 @@
 		<img alt="Discord members" src="https://img.shields.io/discord/1015931589865246730?style=for-the-badge&color=eba0ac&labelColor=1e1e2e&logo=discord&logoColor=fff">
 	</a>
 	<a href="https://github.com/nexpid/VendettaThemeUtil/actions/workflows/runner.yml">
-		<img alt="Runner status" src="https://img.shields.io/github/actions/workflow/status/nexpid/VendettaThemeUtil/runner.yml
-?style=for-the-badge&color=eba0ac&labelColor=1e1e2e&logoColor=fff">
+		<img alt="Runner status" src="https://img.shields.io/github/actions/workflow/status/nexpid/VendettaThemeUtil/runner.yml?style=for-the-badge&labelColor=1e1e2e&label=Runner&logo=eslint&logoColor=fff&color=a6e3a1">
 	</a>
 </div>
 <div align="center">
