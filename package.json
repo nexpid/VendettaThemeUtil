@@ -16,7 +16,7 @@
   "private": false,
   "dependencies": {
     "prettier": "^3.0.0",
-    "symlink-dir": "^5.2.0",
+    "symlink-dir": "^6.0.0",
     "ws": "^8.13.0"
   },
   "devDependencies": {
