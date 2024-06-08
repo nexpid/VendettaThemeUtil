@@ -1,3 +1,6 @@
+> [!NOTE]
+> VendettaThemeUtil has been replaced by [Themelings](https://github.com/nexpid/Themelings). Go check it out! (and also maybe join the Discord server :3)
+
 <div align="center">
 	<a href="https://github.com/nexpid/VendettaThemeUtil/stargazers">
 		<img alt="GitHub stars" src="https://img.shields.io/github/stars/nexpid/VendettaThemeUtil?style=for-the-badge&color=b4befe&labelColor=1e1e2e&logo=starship&logoColor=fff">
